@@ -1,69 +1,59 @@
-from flask import Flask, render_template, url_for, request, redirect
+from flask import Flask, render_template, url_for, request, flash, session, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from models import Usuario, Projeto, RegistroHoras
 import os
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///teste.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///kronos.db'
 db = SQLAlchemy(app)
 
-class toDo(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    content = db.Column(db.String(200), nullable=False)
-    date_creation = db.Column(db.DateTime, default=datetime.utcnow)
-
-    def __repr__(self):
-        return '<Task %r>' % self.id
-
-@app.context_processor
-def override_url_for():
-    return dict(url_for=dated_url_for)
-def dated_url_for(endpoint, **values):
-    if endpoint == 'static':
-        filename = values.get('filename', None)
-        if filename:
-            file_path = os.path.join(app.root_path,
-                                 endpoint, filename)
-            values['q'] = int(os.stat(file_path).st_mtime)
-    return url_for(endpoint, **values)
-
-@app.route('/', methods=['POST','GET', ])
+@app.route('/', methods=['GET',])
 def index():
+    return render_template('index.html')
+
+@app.route('/usuarios', methods=['GET', 'POST',])
+def usuarios():
     if request.method == 'POST':
-        task_content = request.form['content']
-        new_task = toDo(content=task_content)
+        nome = request.form['nome']
+        username = request.form['username']
+        senha = request.form['senha']
+        novo_usuario = Usuario(nome=)
+
         try:
-            db.session.add(new_task)
+            db.session.add(novo_usuario)
             db.session.commit()
-            return redirect('/')
+            return redirect('/usuarios')
         except:
-            return 'There was an issue adding your task'
+            return 'Erro ao adicionar usuário'
+
+    if request.method == 'GET':
+        usuarios = Usuario.query.order_by(Usuario.id).all()
+        return render_template('usuarios.html', usuarios=usuarios)
+
+@app.route('/add_usuario', methods=['GET', 'POST',])
+
+@app.route('/login')
+def login():
+        return render_template('login.html')
+
+@app.route('/autenticar', methods=['POST', ])
+def autenticar():
+    usuario = Usuario.query.get(request.form['usuario'])
+    if usuario:
+        if usuario.senha == request.form['senha']:
+            session['usuario_logado'] = usuario.id
+            flash(usuario.nome + ' logou com sucesso!')
+            proxima_pagina = request.form['proxima']
+            return redirect(proxima_pagina)
+        else:
+        flash('Senha incorreta', category='error')
     else:
-        tasks = toDo.query.order_by(toDo.date_creation).all()
-        return render_template('index.html', tasks=tasks)
+        flash('Usuário não encontrado', category='error')
+        return redirect(url_for('login'))
 
-@app.route('/delete/<int:id>')
-def delete(id):
-    task_to_delete = toDo.query.get_or_404(id)
-    try:
-        db.session.delete(task_to_delete)
-        db.session.commit()
-        return redirect('/')
-    except:
-        return 'There was an error while deleting your task'
-
-@app.route('/update/<int:id>', methods=['GET', 'POST'])
-def update(id):
-    task = toDo.query.get_or_404(id)
-    if request.method == 'POST':
-        task.content = request.form['content']
-        try:
-            db.session.commit()
-            return redirect('/')
-        except:
-            return 'There was an issue updating your task'
-    else:
-        return render_template('update.html', task=task)
-
-if __name__ == "__main__":
-    app.run(debug=True)
+@app.route('/logout')
+def logout():
+    session['usuario_logado'] = None
+    flash('Nenhum usuário logado!')
+    return redirect('/')

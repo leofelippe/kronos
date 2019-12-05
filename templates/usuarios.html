@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+<table>
+    <tr>
+      <th>Usuário</th>
+      <th>Nome Completo</th>
+    </tr>
+    {% for usuario in usuarios %}
+    <tr>
+      <td>{{ usuario.username }}</td>
+      <td>{{ usuario.nome }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  <form action="/add_user" id="form-usuario" method="POST">
+    <input type="text" name="usuario" value="" placeholder="Usuário">
+    <input type="text" name="senha" value="" placeholder="Usuário">    
+    <input type="submit" name="" value="Cadastrar" placeholder ="">
+  </form>
+{% endblock %}
