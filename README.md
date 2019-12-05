@@ -1,2 +1,2 @@
-# kronos
+# Kronos
 Projeto Kronos
