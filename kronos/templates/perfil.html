@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
     <div class="content-section">
-        <h2>{{ current_user.username }}</h2>
+        <div class="media">
+            <div class="media-body">
+                <h2 class="account-heading">{{ current_user.nome }}</h2>
+                <p class="text-secondary">{{ current_user.username }}</p>
+            </div>
+        </div>
+
     </div>
 {% endblock content %}

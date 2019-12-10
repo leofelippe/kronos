@@ -26,19 +26,18 @@ def login():
      
 @app.route('/registrar', methods=['GET', 'POST'])
 def registrar():
-    if current_user.is_authenticated:
-        return redirect(url_for('userpage'))
     form = FormRegistrar()
     if form.validate_on_submit():
         senha_encriptada = bcrypt.generate_password_hash(form.senha.data).decode('utf-8')
         usuario = Usuario(username=form.usuario.data, senha=senha_encriptada, nome=form.nome.data)
         db.session.add(usuario)
         db.session.commit()
-        flash(f'Sua conta foi criada! Efetue o login para continuar', 'success')
+        flash(f'Uma conta para {form.nome.data} foi criada! Efetue o login para continuar', 'success')
         return redirect(url_for('login'))
     return render_template('registrar.html', titulo='Registrar', form=form)
 
 @app.route('/userpage')
+@login_required
 def userpage():
     return render_template('userpage.html', titulo='Página Inicial')
 
@@ -46,6 +45,21 @@ def userpage():
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
+@app.route('/relatorio')
+@login_required
+def relatorio():
+    return render_template('relatorio.html', title='Relatório Horas/Projeto')
+
+@app.route('/usuarios')
+@login_required
+def usuarios():
+    return render_template('usuarios.html', title='Usuários Cadastrados')
+
+@app.route('/projetos')
+@login_required
+def projetos():
+    return render_template('projetos.html', title='Projetos')
 
 @app.route('/perfil')
 @login_required

@@ -1,4 +1,5 @@
 from flask_wtf import FlaskForm
+from flask_login import current_user
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Length, EqualTo
 from kronos.models import Usuario
@@ -17,6 +18,16 @@ class FormRegistrar(FlaskForm):
 
 class FormLogin(FlaskForm):
     usuario = StringField('Usuário', validators=[DataRequired(), Length(min=2, max=50)])
-    senha = PasswordField('Senha', validators=[DataRequired(), Length(min=6)])
+    senha = PasswordField('Senha', validators=[DataRequired()])
     sessao = BooleanField('Continuar Conectado')
     entrar = SubmitField('Entrar')
+
+class FormEditarUsuario(FlaskForm):
+    nome = StringField('Nome', validators=[DataRequired(), Length(min=2, max=50)])
+    usuario = StringField('Usuário', validators=[DataRequired(), Length(min=2, max=20)])
+    registrar = SubmitField('Atualizar')
+
+    def validar_usuario(self, usuario):
+        usuario = Usuario.query.filter_by(username=usuario.data).first()
+        if usuario:
+            raise ValidationError('Usuário já existe')
