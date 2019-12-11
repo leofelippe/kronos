@@ -32,8 +32,8 @@ class RegistroHoras(db.Model):
     data = db.Column(Data, nullable=False)
     aprovacao = db.Column(db.Boolean, default=False)
     total_horas = db.Column(db.Integer, nullable=False)
-    usuario_id = db.Column(db.Integer, db.ForeignKey('usuarios.id'), nullable=False, unique=True)
-    projeto_id = db.Column(db.Integer, db.ForeignKey('projetos.id'), nullable=False, unique=True)
+    usuario_id = db.Column(db.Integer, db.ForeignKey('usuarios.id'), nullable=False)
+    projeto_id = db.Column(db.Integer, db.ForeignKey('projetos.id'), nullable=False)
 
     def __repr__(self):
         return f"<Registro de Horas: '{self.id}', '{self.autor.nome}', '{self.projeto.nome}','{self.data}'>"

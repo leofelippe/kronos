@@ -1,8 +1,35 @@
 {% extends "base.html" %}
 {% block content %}
-
+<h2 style="text-align:center">Registro de Usuários</h2>
 <div class="content-section">
-        <h2 style="text-align:center">Usuários</h2>
-</div>
 
+        <table class="table">
+        <thead class="thead-dark">
+                <tr>
+                <th>ID</th>
+                <th>Usuário</th>
+                <th>Nome Completo</th>
+                <th>Admin</th>
+                <th>Ação</th>
+                </tr>
+        </thead>
+        <tbody>
+                {% for usuario in usuarios %}
+                <tr>
+                        <td>{{ usuario.id }}</td>
+                        <td><a href="{{ url_for('usuario_registros', usuario_id=usuario.id) }}">{{ usuario.username }}</a></td>
+                        <td>{{ usuario.nome }}</td>
+                        {% if usuario.admin %}
+                                <td>Sim</td>
+                        {% else %}
+                                <td>Não</td>
+                        {% endif %}
+                        <td>
+                                <p><a class="btn btn-secondary btn-sm m-1" href="{{ url_for('editar_usuario', usuario_id=usuario.id) }}">Editar</a>
+                                <a class="btn btn-danger btn-sm m-1" href="{{ url_for('deletar_usuario', usuario_id=usuario.id) }}">Deletar</a></p>
+                        </td>
+                </tr>
+                {% endfor %}
+        </tbody>
+        </table>
 {% endblock content %}

@@ -1,8 +1,37 @@
 {% extends "base.html" %}
 {% block content %}
-
+<a class="btn btn-secondary" href="{{ url_for('novo_projeto')}}">Novo Projeto</a>
+<h2 style="text-align:center">Projetos</h2>
 <div class="content-section">
-        <h2 style="text-align:center">Projetos</h2>
-</div>
 
+
+        <table class="table">
+        <thead class="thead-dark">
+                <tr>
+                <th>ID</th>
+                <th>Projeto</th>
+                <th>Descrição</th>
+                <th>Data de Início</th>
+                <th>Data de Entrega</th>
+                <th>Horas Trabalhadas</th>
+                <th>Ação</th>
+                </tr>
+        </thead>
+        <tbody>
+                {% for projeto in projetos %}
+                <tr>
+                        <td>{{ projeto.id }}</td>
+                        <td>{{ projeto.nome }}</td>
+                        <td>{{ projeto.descricao }}</td>
+                        <td>{{ projeto.data_inicio.strftime('%d/%m/%Y') }}</td>
+                        <td>{{ projeto.data_entrega.strftime('%d/%m/%Y') }}</td>
+                        <td>{{ projeto.total_horas }}</td>
+                        <td>
+                                <p><a class="btn btn-secondary btn-sm m-1" href="{{ url_for('editar_projeto', projeto_id=projeto.id) }}">Editar</a>
+                                <a class="btn btn-danger btn-sm m-1" href="{{ url_for('deletar_projeto', projeto_id=projeto.id) }}">Deletar</a></p>
+                        </td>
+                </tr>
+                {% endfor %}
+        </tbody>
+        </table>
 {% endblock content %}

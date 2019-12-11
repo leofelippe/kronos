@@ -1,8 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h2 style="text-align:center">Registro de Horas</h2>
-<a class="btn btn-secondary" href="{{ url_for('novo_registro')}}">Registrar Horas</a>
+<h2 style="text-align:center">Registros de {{ usuario.nome }}</h2>
 <div class="content-section">
         <table class="table">
                 <thead class="thead-dark">
@@ -22,9 +21,9 @@
                                 <td>{{ registro.projeto.nome }}</td>
                                 <td>{{ registro.total_horas }}</td>
                                 {% if registro.aprovacao %}
-                                        <td><p class="btn btn-secondary btn-sm m-1">Aprovado</p></td>
+                                        <td><a class="btn btn-secondary btn-sm m-1" href="{{ url_for('reprovar', registro_id=registro.id, usuario_id=usuario.id) }}">Aprovado</a></td>
                                 {% else %}
-                                        <td><p class="btn btn-danger btn-sm m-1">Não Aprovado</p></td>
+                                        <td><a class="btn btn-danger btn-sm m-1" href="{{ url_for('aprovar', registro_id=registro.id, usuario_id=usuario.id) }}">Não Aprovado</a></td>
                                 {% endif %}
                         </tr>
                         {% endfor %}
