@@ -28,7 +28,7 @@
               {% else %}
                 {% if current_user.is_authenticated %}
                   <a class="nav-item nav-link" href="{{ url_for('userpage') }}">Página Inicial</a>
-                  <a class="nav-item nav-link" href="{{ url_for('relatorio', usuario_id=current_user.id) }}">Relatório Horas/Projeto</a>
+                  <a class="nav-item nav-link" href="{{ url_for('relatorio', usuario_id=current_user.id) }}">Relatório de Registros</a>
                 {% else %}
                   <a class="nav-item nav-link" href="{{ url_for('userpage') }}">Página Inicial</a>
                 {% endif %}
