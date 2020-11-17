@@ -10,7 +10,7 @@ from flask_login import login_user, logout_user, current_user, login_required
 def index():
     return render_template('index.html')
 
-@app.route('/login.html', methods=['GET', 'POST',])
+@app.route('/login', methods=['GET', 'POST',])
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('userpage'))
@@ -25,12 +25,12 @@ def login():
             flash('Não foi possível logar. Por favor, cheque os dados e tente novamente!', 'warning')
     return render_template('login.html', titulo='Login', form=form)
      
-@app.route('/perfil.html')
+@app.route('/perfil')
 @login_required
 def perfil():
     return render_template('perfil.html', titulo='Perfil')
 
-@app.route('/relatorio/<int:usuario_id>.html')
+@app.route('/relatorio/<int:usuario_id>')
 @login_required
 def relatorio(usuario_id):
     projetos = Projeto.query.all()
@@ -38,13 +38,13 @@ def relatorio(usuario_id):
     return render_template('relatorio.html', titulo='Relatório Horas/Projeto', registros=registros, projetos=projetos)
 
 #REGISTROS
-@app.route('/userpage.html')
+@app.route('/userpage')
 @login_required
 def userpage():
     registros = RegistroHoras.query.filter_by(usuario_id=current_user.id)
     return render_template('userpage.html', titulo='Página Inicial', registros=registros)
 
-@app.route('/novo_registro.html', methods=['GET', 'POST'])
+@app.route('/novo_registro', methods=['GET', 'POST'])
 @login_required
 def novo_registro():
     projetos = Projeto.query.all()
@@ -61,14 +61,14 @@ def novo_registro():
         return redirect(url_for('userpage'))
     return render_template('novo_registro.html', titulo='Novo Registro', form=form)
 
-@app.route('/usuario_registros/<int:usuario_id>.html')
+@app.route('/usuario_registros/<int:usuario_id>')
 def usuario_registros(usuario_id):
     usuario = Usuario.query.get_or_404(usuario_id)
     registros = RegistroHoras.query.filter_by(usuario_id=usuario.id)
     titulo = 'Registros - ' + usuario.nome
     return render_template('usuario_registros.html', titulo =' Registros -' + usuario.nome, registros=registros, usuario=usuario)
 
-@app.route('/aprovar/<int:registro_id>.html')
+@app.route('/aprovar/<int:registro_id>')
 def aprovar(registro_id):
     registro = RegistroHoras.query.get_or_404(registro_id)
     registro.aprovacao = True
@@ -76,7 +76,7 @@ def aprovar(registro_id):
     flash('Registro aprovado!', 'success')
     return redirect(url_for('usuario_registros', usuario_id=registro.autor.id))
 
-@app.route('/reprovar/<int:registro_id>.html')
+@app.route('/reprovar/<int:registro_id>')
 def reprovar(registro_id):
     registro = RegistroHoras.query.get_or_404(registro_id)
     registro.aprovacao = False
@@ -85,13 +85,13 @@ def reprovar(registro_id):
     return redirect(url_for('usuario_registros', usuario_id=registro.autor.id))
 
 #USUARIOS
-@app.route('/usuarios.html')
+@app.route('/usuarios')
 @login_required
 def usuarios():
     usuarios = Usuario.query.all()
     return render_template('usuarios.html', titulo='Usuários Cadastrados', usuarios=usuarios)
 
-@app.route('/registrar.html', methods=['GET', 'POST'])
+@app.route('/registrar', methods=['GET', 'POST'])
 def registrar():
     form = FormRegistrar()
     if form.validate_on_submit():
@@ -103,7 +103,7 @@ def registrar():
         return redirect(url_for('login'))
     return render_template('registrar.html', titulo='Registrar', form=form)
 
-@app.route('/editar_usuario/<int:usuario_id>.html', methods=['GET', 'POST'])
+@app.route('/editar_usuario/<int:usuario_id>', methods=['GET', 'POST'])
 @login_required
 def editar_usuario(usuario_id):
     usuario = Usuario.query.get_or_404(usuario_id)
@@ -121,7 +121,7 @@ def editar_usuario(usuario_id):
         form.admin.data = usuario.admin
     return render_template('editar_usuario.html', titulo='Editar Usuário', form=form)
 
-@app.route('/deletar_usuario/<int:usuario_id>.html', methods=['GET', 'POST'])
+@app.route('/deletar_usuario/<int:usuario_id>', methods=['GET', 'POST'])
 @login_required
 def deletar_usuario(usuario_id):
     usuario = Usuario.query.get_or_404(usuario_id)
@@ -131,13 +131,13 @@ def deletar_usuario(usuario_id):
     return redirect(url_for('usuarios'))   
 
 #PROJETOS
-@app.route('/projetos.html')
+@app.route('/projetos')
 @login_required
 def projetos():
     projetos = Projeto.query.all()
     return render_template('projetos.html', titulo='Projetos', projetos=projetos)
 
-@app.route('/novo_projeto.html', methods=['GET', 'POST'])
+@app.route('/novo_projeto', methods=['GET', 'POST'])
 @login_required
 def novo_projeto():
     form = FormProjeto()
@@ -150,7 +150,7 @@ def novo_projeto():
         return redirect(url_for('projetos'))
     return render_template('novo_projeto.html', titulo='Novo Projeto', form=form)
     
-@app.route('/editar_projeto/<int:projeto_id>.html', methods=['GET', 'POST'])
+@app.route('/editar_projeto/<int:projeto_id>', methods=['GET', 'POST'])
 @login_required
 def editar_projeto(projeto_id):
     projeto = Projeto.query.get_or_404(projeto_id)
@@ -168,7 +168,7 @@ def editar_projeto(projeto_id):
         form.data_entrega.data = projeto.data_entrega
     return render_template('editar_projeto.html', titulo='Editar Projeto', form=form)
 
-@app.route('/deletar_projeto/<int:projeto_id>.html', methods=['GET', 'POST'])
+@app.route('/deletar_projeto/<int:projeto_id>', methods=['GET', 'POST'])
 @login_required
 def deletar_projeto(projeto_id):
     projeto = projeto.query.get_or_404(projeto_id)
@@ -177,7 +177,7 @@ def deletar_projeto(projeto_id):
     flash('Projeto {projeto.nome} removido com sucesso!', 'success')
     return redirect(url_for('projetos'))   
 
-@app.route('/logout.html')
+@app.route('/logout')
 def logout():
     logout_user()
     return redirect(url_for('index'))
