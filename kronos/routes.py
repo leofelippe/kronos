@@ -10,7 +10,7 @@ from flask_login import login_user, logout_user, current_user, login_required
 def index():
     return render_template('index.html')
 
-@app.route('/login', methods=['GET', 'POST',])
+@app.route('/login.html', methods=['GET', 'POST',])
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('userpage'))
@@ -99,7 +99,7 @@ def registrar():
         usuario = Usuario(username=form.usuario.data, senha=senha_encriptada, nome=form.nome.data)
         db.session.add(usuario)
         db.session.commit()
-        flash('Uma conta para {form.nome.data} foi criada!', 'success')
+        flash(f'Uma conta para {form.nome.data} foi criada!', 'success')
         return redirect(url_for('login'))
     return render_template('registrar.html', titulo='Registrar', form=form)
 
@@ -113,7 +113,7 @@ def editar_usuario(usuario_id):
         usuario.nome = form.nome.data
         usuario.admin = form.admin.data
         db.session.commit()
-        flash('Usuário {usuario.username} atualizado com sucesso!', 'success')
+        flash(f'Usuário {usuario.username} atualizado com sucesso!', 'success')
         return redirect(url_for('usuarios'))
     elif request.method == 'GET':
         form.usuario.data = usuario.username
@@ -127,7 +127,7 @@ def deletar_usuario(usuario_id):
     usuario = Usuario.query.get_or_404(usuario_id)
     db.session.delete(usuario)
     db.session.commit()
-    flash('Usuário {usuario.username} removido com sucesso!', 'success')
+    flash(f'Usuário {usuario.username} removido com sucesso!', 'success')
     return redirect(url_for('usuarios'))   
 
 #PROJETOS
@@ -174,7 +174,7 @@ def deletar_projeto(projeto_id):
     projeto = projeto.query.get_or_404(projeto_id)
     db.session.delete(projeto)
     db.session.commit()
-    flash('Projeto {projeto.nome} removido com sucesso!', 'success')
+    flash(f'Projeto {projeto.nome} removido com sucesso!', 'success')
     return redirect(url_for('projetos'))   
 
 @app.route('/logout')
