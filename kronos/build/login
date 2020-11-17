@@ -46,7 +46,7 @@
           
     <div class="content-section">
         <form method="POST" action="">
-            <input id="csrf_token" name="csrf_token" type="hidden" value="Ijc1YTE4MmVmMWZjOGRiYjllYmJiMjI2NjQ0ODQzZmRkYWM5ODRjMjci.X7M03g._nk4PSL1FqpAxv5PwY1T9bF7bk0">
+            <input id="csrf_token" name="csrf_token" type="hidden" value="IjI4NDdjMDI1Njg5MTk3OWQzOWM2YjI1ZGI0ZmMwODBjMDQxYzc3N2Ui.X7NKjw.ha78-f5aOSe4CfsSlzRLGlrYhUk">
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Login</legend>
                 <div class="form-group">
