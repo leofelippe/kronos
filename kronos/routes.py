@@ -99,7 +99,7 @@ def registrar():
         usuario = Usuario(username=form.usuario.data, senha=senha_encriptada, nome=form.nome.data)
         db.session.add(usuario)
         db.session.commit()
-        flash('Uma conta para {form.nome.data} foi criada!', 'success')
+        flash(f'Uma conta para '{form.nome.data}' foi criada!', 'success')
         return redirect(url_for('login'))
     return render_template('registrar.html', titulo='Registrar', form=form)
 
@@ -113,7 +113,7 @@ def editar_usuario(usuario_id):
         usuario.nome = form.nome.data
         usuario.admin = form.admin.data
         db.session.commit()
-        flash(f'Usuário {usuario.username} atualizado com sucesso!', 'success')
+        flash(f'Usuário '{usuario.username}' atualizado com sucesso!', 'success')
         return redirect(url_for('usuarios'))
     elif request.method == 'GET':
         form.usuario.data = usuario.username
@@ -127,7 +127,7 @@ def deletar_usuario(usuario_id):
     usuario = Usuario.query.get_or_404(usuario_id)
     db.session.delete(usuario)
     db.session.commit()
-    flash(f'Usuário {usuario.username} removido com sucesso!', 'success')
+    flash(f'Usuário '{usuario.username}' removido com sucesso!', 'success')
     return redirect(url_for('usuarios'))   
 
 #PROJETOS
@@ -146,7 +146,7 @@ def novo_projeto():
         data_inicio=form.data_inicio.data, data_entrega=form.data_entrega.data)
         db.session.add(projeto)
         db.session.commit()
-        flash(f'{form.nome.data} foi criado!', 'success')
+        flash(f''{form.nome.data}' foi criado!', 'success')
         return redirect(url_for('projetos'))
     return render_template('novo_projeto.html', titulo='Novo Projeto', form=form)
     
@@ -160,7 +160,7 @@ def editar_projeto(projeto_id):
         projeto.descricao = form.descricao.data
         projeto.data_entrega = form.data_entrega.data
         db.session.commit()
-        flash(f'Projeto {projeto.nome} atualizado com sucesso!', 'success')
+        flash(f'Projeto '{projeto.nome}' atualizado com sucesso!', 'success')
         return redirect(url_for('projetos'))
     elif request.method == 'GET':
         form.nome.data = projeto.nome
@@ -174,7 +174,7 @@ def deletar_projeto(projeto_id):
     projeto = projeto.query.get_or_404(projeto_id)
     db.session.delete(projeto)
     db.session.commit()
-    flash(f'Projeto {projeto.nome} removido com sucesso!', 'success')
+    flash(f'Projeto '{projeto.nome}' removido com sucesso!', 'success')
     return redirect(url_for('projetos'))   
 
 @app.route('/logout')
