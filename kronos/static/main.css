@@ -8,6 +8,11 @@ body {
     color: #444444;
   }
   
+.logo {
+    width: 50%;
+    margin: 0 auto;
+}
+
   .bg-steel {
     background-color: #5f788a;
   }
