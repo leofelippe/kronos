@@ -25,7 +25,7 @@ class Usuario(db.Model, UserMixin):
     registros = db.relationship('RegistroHoras', backref='autor', lazy=True)
 
     def __repr__(self):
-        return f"<Usuario: '{self.id}', '{self.username}', '{self.nome}'>"
+        return "<Usuario: '{self.id}', '{self.username}', '{self.nome}'>"
 
 class RegistroHoras(db.Model):
     __tablename__ = 'registros'
@@ -37,7 +37,7 @@ class RegistroHoras(db.Model):
     projeto_id = db.Column(db.Integer, db.ForeignKey('projetos.id'), nullable=False)
 
     def __repr__(self):
-        return f"<Registro de Horas: '{self.id}', '{self.autor.nome}', '{self.projeto.nome}','{self.data}'>"
+        return "<Registro de Horas: '{self.id}', '{self.autor.nome}', '{self.projeto.nome}','{self.data}'>"
 
 class Projeto(db.Model):
     __tablename__ = 'projetos'
@@ -50,4 +50,4 @@ class Projeto(db.Model):
     registros = db.relationship('RegistroHoras', backref='projeto', lazy=True)
 
     def __repr__(self):
-        return f"<Projeto: '{self.id}', '{self.nome}', '{self.data_entrega}'>"
+        return "<Projeto: '{self.id}', '{self.nome}', '{self.data_entrega}'>"
