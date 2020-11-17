@@ -1,4 +1,4 @@
-# encoding: utf-8
+
 from flask import render_template, url_for, request, flash, redirect
 from kronos import app, db, bcrypt
 from kronos.forms import FormRegistrar, FormLogin, FormEditarUsuario, FormProjeto, FormEditarProjeto, FormRegistro
@@ -22,7 +22,7 @@ def login():
             proxima_pagina = request.args.get('next')
             return redirect(proxima_pagina) if proxima_pagina else redirect(url_for('userpage'))
         else:
-            flash('Não foi possível logar. Por favor, cheque os dados e tente novamente!', 'warning')
+            flash(u'Não foi possível logar. Por favor, cheque os dados e tente novamente!', 'warning')
     return render_template('login.html', titulo='Login', form=form)
      
 @app.route('/perfil')
