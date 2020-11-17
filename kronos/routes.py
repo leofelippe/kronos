@@ -21,7 +21,7 @@ def login():
             proxima_pagina = request.args.get('next')
             return redirect(proxima_pagina) if proxima_pagina else redirect(url_for('userpage'))
         else:
-            flash('Não foi possível logar. Por favor, cheque os dados e tente novamente!', 'danger')
+            flash(f'Não foi possível logar. Por favor, cheque os dados e tente novamente!', 'danger')
     return render_template('login.html', titulo='Login', form=form)
      
 @app.route('/perfil')
