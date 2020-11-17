@@ -57,7 +57,7 @@ def novo_registro():
         projeto.total_horas += registro.total_horas
         db.session.add(registro)
         db.session.commit()
-        flash(f'Esforço registrado!', 'success')
+        flash('Esforço registrado!', 'success')
         return redirect(url_for('userpage'))
     return render_template('novo_registro.html', titulo='Novo Registro', form=form)
 
@@ -99,7 +99,7 @@ def registrar():
         usuario = Usuario(username=form.usuario.data, senha=senha_encriptada, nome=form.nome.data)
         db.session.add(usuario)
         db.session.commit()
-        flash(f'Uma conta para {form.nome.data} foi criada!', 'success')
+        flash('Uma conta para {form.nome.data} foi criada!', 'success')
         return redirect(url_for('login'))
     return render_template('registrar.html', titulo='Registrar', form=form)
 
