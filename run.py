@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask_frozen import Freezer
 from kronos import app
 

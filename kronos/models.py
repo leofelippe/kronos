@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from datetime import datetime
 from kronos import db, login_manager
 from flask_login import UserMixin
