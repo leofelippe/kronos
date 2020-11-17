@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/static/main.css">
     
-      <title>Kronos</title>
+      <title>Kronos -  Registros -Admin</title>
     
     </head>
   <body>
@@ -42,12 +42,51 @@
         <div class="col">
           
             
+              
+                <div class="alert alert-danger">
+                  Registro não aprovado!
+                </div>
+              
+            
           
           
-<div align="center">
-    <img  src="/static/logo_novo.png">
-    <br>
-    <a class ="btn btn-primary mt-5" href="/login.html">Acessar o Sistema</a>
+
+<h2 style="text-align:center">Registros de Admin</h2>
+<div class="content-section">
+        <table class="table">
+                <thead class="thead-dark">
+                        <tr>
+                        <th>REQ</th>
+                        <th>Data</th>
+                        <th>Projeto</th>
+                        <th>Horas Trabalhadas</th>
+                        <th>Aprovação</th>
+                        </tr>
+                </thead>
+                <tbody>
+                        
+                        <tr>
+                                <td>1</td>
+                                <td>01/12/2019</td>
+                                <td>Kronos</td>
+                                <td>8</td>
+                                
+                                        <td><a class="btn btn-danger btn-sm m-1" href="/aprovar/1.html?usuario_id=1">Não Aprovado</a></td>
+                                
+                        </tr>
+                        
+                        <tr>
+                                <td>2</td>
+                                <td>02/12/2019</td>
+                                <td>Kronos</td>
+                                <td>5</td>
+                                
+                                        <td><a class="btn btn-secondary btn-sm m-1" href="/reprovar/2.html?usuario_id=1">Aprovado</a></td>
+                                
+                        </tr>
+                        
+                </tbody>
+                </table>
 </div>
 
         </div>

@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/static/main.css">
     
-      <title>Kronos</title>
+      <title>Kronos - Login</title>
     
     </head>
   <body>
@@ -42,13 +42,41 @@
         <div class="col">
           
             
+              
+                <div class="alert alert-info">
+                  Please log in to access this page.
+                </div>
+              
+            
           
           
-<div align="center">
-    <img  src="/static/logo_novo.png">
-    <br>
-    <a class ="btn btn-primary mt-5" href="/login.html">Acessar o Sistema</a>
-</div>
+    <div class="content-section">
+        <form method="POST" action="">
+            <input id="csrf_token" name="csrf_token" type="hidden" value="ImI2MjY1ZDcyMzAzOTE2MGI0ZDdiODdkYzcxYmZkMzcwMDg1NTliYjIi.X7Pt2g.7iXNXLkzoS_MDsMHoB_3OF0mE7c">
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Login</legend>
+                <div class="form-group">
+                    <label class="form-control-label" for="usuario">Usuário</label>
+                    
+                        <input class="form-control form-control-lg" id="usuario" name="usuario" required type="text" value="">
+                    
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="senha">Senha</label>
+                    
+                        <input class="form-control form-control-lg" id="senha" name="senha" required type="password" value="">
+                    
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" id="sessao" name="sessao" type="checkbox" value="y">
+                    <label class="form-check-label" for="sessao">Continuar Conectado</label>
+                </div>
+            </fieldset>
+            <div class="form-group">
+                <input class="btn btn-outline-info" id="entrar" name="entrar" type="submit" value="Entrar">
+            </div>
+        </form>
+    </div>
 
         </div>
       </div>

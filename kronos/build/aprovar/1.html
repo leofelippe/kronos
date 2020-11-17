@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/static/main.css">
     
-      <title>Kronos - Login</title>
+      <title>Kronos -  Registros -Admin</title>
     
     </head>
   <body>
@@ -21,14 +21,14 @@
             <div class="navbar-nav mr-auto">
               
                 
-                  <a class="nav-item nav-link" href="/userpage">Página Inicial</a>
+                  <a class="nav-item nav-link" href="/userpage.html">Página Inicial</a>
                 
               
             </div>
             <div class="navbar-nav">
               
                 
-                  <a class="nav-item nav-link" href="/login">Login</a> 
+                  <a class="nav-item nav-link" href="/login.html">Login</a> 
                 
               
             </div>
@@ -43,40 +43,51 @@
           
             
               
-                <div class="alert alert-info">
-                  Please log in to access this page.
+                <div class="alert alert-success">
+                  Registro aprovado!
                 </div>
               
             
           
           
-    <div class="content-section">
-        <form method="POST" action="">
-            <input id="csrf_token" name="csrf_token" type="hidden" value="IjI4NDdjMDI1Njg5MTk3OWQzOWM2YjI1ZGI0ZmMwODBjMDQxYzc3N2Ui.X7NKjw.ha78-f5aOSe4CfsSlzRLGlrYhUk">
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Login</legend>
-                <div class="form-group">
-                    <label class="form-control-label" for="usuario">Usuário</label>
-                    
-                        <input class="form-control form-control-lg" id="usuario" name="usuario" required type="text" value="">
-                    
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="senha">Senha</label>
-                    
-                        <input class="form-control form-control-lg" id="senha" name="senha" required type="password" value="">
-                    
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" id="sessao" name="sessao" type="checkbox" value="y">
-                    <label class="form-check-label" for="sessao">Continuar Conectado</label>
-                </div>
-            </fieldset>
-            <div class="form-group">
-                <input class="btn btn-outline-info" id="entrar" name="entrar" type="submit" value="Entrar">
-            </div>
-        </form>
-    </div>
+
+<h2 style="text-align:center">Registros de Admin</h2>
+<div class="content-section">
+        <table class="table">
+                <thead class="thead-dark">
+                        <tr>
+                        <th>REQ</th>
+                        <th>Data</th>
+                        <th>Projeto</th>
+                        <th>Horas Trabalhadas</th>
+                        <th>Aprovação</th>
+                        </tr>
+                </thead>
+                <tbody>
+                        
+                        <tr>
+                                <td>1</td>
+                                <td>01/12/2019</td>
+                                <td>Kronos</td>
+                                <td>8</td>
+                                
+                                        <td><a class="btn btn-secondary btn-sm m-1" href="/reprovar/1.html?usuario_id=1">Aprovado</a></td>
+                                
+                        </tr>
+                        
+                        <tr>
+                                <td>2</td>
+                                <td>02/12/2019</td>
+                                <td>Kronos</td>
+                                <td>5</td>
+                                
+                                        <td><a class="btn btn-danger btn-sm m-1" href="/aprovar/2.html?usuario_id=1">Não Aprovado</a></td>
+                                
+                        </tr>
+                        
+                </tbody>
+                </table>
+</div>
 
         </div>
       </div>
