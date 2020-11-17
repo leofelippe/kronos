@@ -46,7 +46,7 @@
           
     <div class="content-section">
         <form method="POST" action="">
-            <input id="csrf_token" name="csrf_token" type="hidden" value="ImYyYWFlZWM5ZmVkYTBlMmQ1ZjNiM2UzYzJmMzllMjYwMTM4MjE2MDIi.X7Msnw.Dal_RIVIjeqMGRrX2myLAJplxfk">
+            <input id="csrf_token" name="csrf_token" type="hidden" value="Ijc1YTE4MmVmMWZjOGRiYjllYmJiMjI2NjQ0ODQzZmRkYWM5ODRjMjci.X7M03g._nk4PSL1FqpAxv5PwY1T9bF7bk0">
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Registrar Usuário</legend>
                 <div class="form-group">
