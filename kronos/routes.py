@@ -171,7 +171,7 @@ def editar_projeto(projeto_id):
 @app.route('/deletar_projeto/<int:projeto_id>', methods=['GET', 'POST'])
 @login_required
 def deletar_projeto(projeto_id):
-    projeto = projeto.query.get_or_404(projeto_id)
+    projeto = Projeto.query.get_or_404(projeto_id)
     db.session.delete(projeto)
     db.session.commit()
     flash(f'Projeto {projeto.nome} removido com sucesso!', 'success')
